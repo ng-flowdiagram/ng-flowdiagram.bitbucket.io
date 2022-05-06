@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { nodeLink } from "./raw-data";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-diagram',
@@ -9,6 +10,8 @@ import { nodeLink } from "./raw-data";
 export class DiagramComponent implements OnInit {
   links = [...nodeLink.links];
   nodes = [...nodeLink.node];
+  lodash = _;
+  dotarray = ['markupcomp','surge','dot','stageone','stagetwo','recycle',];
 
   constructor() {
     this.nodes = this.nodes.map((v: any)=> {
