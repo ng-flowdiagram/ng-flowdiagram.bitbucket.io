@@ -39,10 +39,13 @@
         [attr.rx]="node.rx"
       />
       <!-- <path d="M0,0 h200 a20,20 0 0 1 20,20 v200 a20,20 0 0 1 -20,20 h-200 a20,20 0 0 1 -20,-20 v-200 a20,20 0 0 1 20,-20 z" fill="none"   stroke="black" stroke-width="3" *ngIf="node.id === 'glseper'"/> -->
-        <circle [attr.cx]="nodeSize(node).width / 2" [attr.cy]="0" r="20" [attr.stroke-width]="node.strokeWidth" [attr.stroke]="node.stroke" [attr.fill]="node.data.color" *ngIf="lodash.includes(this.dotarray, node.id)" />
+        <circle [attr.cx]="0" [attr.cy]="0" r="20" [attr.stroke-width]="node.strokeWidth" [attr.stroke]="node.stroke" [attr.fill]="node.data.color" *ngIf="lodash.includes(this.dotarray, node.id)" />
 
-        <svg:text [attr.x]="nodeSize(node).width / 2" [attr.y]="node.dimension.height / 2" dominant-baseline="middle" text-anchor="middle" *ngIf="node.id !== 'dot'">
+      <svg:text [attr.x]="nodeSize(node).width / 2" [attr.y]="node.dimension.height / 2" dominant-baseline="middle" text-anchor="middle" *ngIf="node.id !== 'dot'">
         {{node.label}}
+      </svg:text>
+      <svg:text [attr.x]="nodeSize(node).width / 2" [attr.y]="node.dimension.height / 2" dominant-baseline="middle" text-anchor="middle" *ngIf="node.id === 'dot'">
+        &nbsp;
       </svg:text>
     </svg:g>
   </ng-template>
