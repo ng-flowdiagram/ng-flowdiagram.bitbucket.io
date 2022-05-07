@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { nodeLink } from "./raw-data";
 import * as _ from 'lodash';
+import { HttpClient } from '@angular/common/http';
+import { DagreNodesOnlyLayout } from './customStepCurved';
+import * as shape from 'd3-shape';
+import { Layout } from '@swimlane/ngx-graph';
 
 @Component({
   selector: 'app-diagram',
@@ -8,12 +12,21 @@ import * as _ from 'lodash';
   styleUrls: ['./diagram.component.scss']
 })
 export class DiagramComponent implements OnInit {
+  layoutSettings = {
+    orientation: 'TB'
+  };
   links = [...nodeLink.links];
   nodes = [...nodeLink.node];
+  curve: any = shape.curveLinear;
   lodash = _;
   dotarray = ['markupcomp','surge','dot','stageone','stagetwo','recycle',];
+  layout: Layout = new DagreNodesOnlyLayout();
+  strokeWidth: number = 0;
 
-  constructor() {
+  constructor(
+    public http: HttpClient
+  ) {
+
     this.nodes = this.nodes.map((v: any)=> {
       if (v.id === "stageone" || v.id === "stagetwo") {
         v.rx = 75;
@@ -27,10 +40,13 @@ export class DiagramComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dotarray.forEach(item => {
+      console.log(_.findLast(this.nodes,(v)=> v.id === item), '++++++')
 
+    });
   }
   nodeSize(node: any) {
-    console.log(node);
+    // console.log(node);
     if (node.id === "glseper") {
       return {
         width: 200,
@@ -53,5 +69,29 @@ export class DiagramComponent implements OnInit {
       }
     }
 
+  }
+  setname(item: string) {
+    let json = _.findLast(this.nodes,(v:any)=> v.id === item);
+    return json?.label;
+  }
+  setDes(item: string) {
+    let json = _.findLast(this.nodes,(v:any)=> v.id === item);
+    return json?.desp;
+  }
+  setDot(item: string) {
+    let json: any  = _.findLast(this.nodes,(v:any)=> v.id === item);
+    return json?.data.color;
+  }
+
+  mouseEnter(item: any) {
+    let json: any  = _.findIndex(this.nodes,(v:any)=> v.id === item);
+    nodeLink.node[json].strokeWidth = 10;
+    console.log(json,nodeLink.node)
+    return nodeLink.node[json].strokeWidth = 10;
+  }
+  mouseLeave(item: any) {
+    let json: any  = _.findIndex(this.nodes,(v:any)=> v.id === item);
+    console.log(json)
+    return nodeLink.node[json].strokeWidth = 0;
   }
 }

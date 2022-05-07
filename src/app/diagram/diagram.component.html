@@ -2,7 +2,11 @@
   class="chart-container"
   [links]="links"
   [nodes]="nodes"
-
+  [curve]="curve"
+  [layout]="layout"
+  [layoutSettings]="layoutSettings"
+  [enableZoom]="true"
+  [autoZoom]="true"
   layout="dagreCluster"
 >
   <ng-template #defsTemplate>
@@ -26,19 +30,18 @@
   <ng-template #nodeTemplate let-node>
     <svg:g class="node">
       <svg:rect
-
         [attr.width]="nodeSize(node).width"
         [attr.height]="nodeSize(node).height"
-        [attr.fill]="'#fff'"
+        [attr.fill]="lodash.includes(this.dotarray, node.id) || node.id === 'glseper'? '#cdffe6' : '#fff'"
         stroke-width="2"
         [attr.stroke]="node.stroke"
         stroke-linejoin="round"
         [attr.rx]="node.rx"
       />
       <!-- <path d="M0,0 h200 a20,20 0 0 1 20,20 v200 a20,20 0 0 1 -20,20 h-200 a20,20 0 0 1 -20,-20 v-200 a20,20 0 0 1 20,-20 z" fill="none"   stroke="black" stroke-width="3" *ngIf="node.id === 'glseper'"/> -->
+        <circle [attr.cx]="nodeSize(node).width / 2" [attr.cy]="0" r="20" [attr.stroke-width]="node.strokeWidth" [attr.stroke]="node.stroke" [attr.fill]="node.data.color" *ngIf="lodash.includes(this.dotarray, node.id)" />
 
-      <circle [attr.cx]="nodeSize(node).width / 2" [attr.cy]="0" r="7" [attr.fill]="node.data.color" *ngIf="lodash.includes(this.dotarray, node.id)" />
-        <svg:text [attr.x]="nodeSize(node).width / 2" [attr.y]="node.dimension.height / 2" dominant-baseline="middle" text-anchor="middle">
+        <svg:text [attr.x]="nodeSize(node).width / 2" [attr.y]="node.dimension.height / 2" dominant-baseline="middle" text-anchor="middle" *ngIf="node.id !== 'dot'">
         {{node.label}}
       </svg:text>
     </svg:g>
@@ -61,15 +64,21 @@
   </ng-template>
 </ngx-graph>
 
+<!-- Right side panel -->
 <div class="right-panel">
   <h4>Current Recomendation</h4>
-  <h5>Margin increased oppurtunity: $334.45</h5>
-  <h6>Recomendation generated at 05-08-21</h6>
-  <ul class="list-group">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Morbi leo risus</li>
-    <li class="list-group-item">Porta ac consectetur ac</li>
-    <li class="list-group-item">Vestibulum at eros</li>
+  <div style="margin: 28px 0;">
+    <h5>Margin increased oppurtunity: $334.45</h5>
+    <h6 class="text-muted">Recomendation generated at 05-08-21</h6>
+  </div>
+
+  <ul class="list-group list">
+    <li class="list-group-item" *ngFor="let item of dotarray" style="margin-bottom: 15px; display: flex;" (mouseenter)="mouseEnter(item)"  (mouseleave)="mouseLeave(item)">
+      <i class="fa fa-circle" aria-hidden="true" [style.color]="setDot(item)"></i>
+      <div>
+        <h6> {{setname(item)}} </h6>
+        <span class="text-muted" style="font-size: small ;"> {{setDes(item)}} </span>
+      </div>
+    </li>
   </ul>
 </div>
