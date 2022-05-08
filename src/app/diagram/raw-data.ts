@@ -5,91 +5,106 @@ export const nodeLink = {
       label: 'T Train 2',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'markup',
       label: 'Markeup H2',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'feed',
       label: 'feed',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'markupcomp',
       label: 'Markeup H2 Compressor',
       stroke: "green",
       desp: "Increase the flow from 0.29 kt to 0.3 kt",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: "../../assets/factories-factory-svgrepo-com.svg"
     }, {
       id: 'surge',
       label: 'Feed Surge Drum',
       stroke: "green",
       desp: "Increase level from 67% to 72%",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'dot',
       label: 'Contrifugal Pump',
       stroke: "green",
       desp: "Decrease the flow by 5%",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img:  "../../assets/user-svgrepo-com.svg"
     }, {
       id: 'stageone',
       label: 'Reactor - Stage 1',
       stroke: "green",
       desp: "Increase yield from 90% to 93%",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'stagetwo',
       label: 'Reactor - Stage 2',
       stroke: "green",
       desp: "Increase yield from 85% to 92%",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'recycle',
       label: 'Recycle H2 Compression',
       stroke: "green",
       desp: "Increase the IGV from 69.1% to 69.7%",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'water',
       label: 'Injection Water',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'glseper',
       label: 'Gas/Liquid Seperation',
       stroke: "green",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'rich',
       label: 'Rich Anime',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'sw',
       label: 'SW',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'tofrac',
       label: 'To Fractionator',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }, {
       id: 'fromfrac',
       label: 'From Fractionator',
       stroke: "grey",
       desp: "",
-      strokeWidth: 0
+      strokeWidth: 0,
+      img: ""
     }
   ],
   links: [

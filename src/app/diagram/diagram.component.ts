@@ -18,10 +18,14 @@ export class DiagramComponent implements OnInit {
   links = [...nodeLink.links];
   nodes = [...nodeLink.node];
   curve: any = shape.curveLinear;
-  lodash = _;
-  dotarray = ['markupcomp','surge','dot','stageone','stagetwo','recycle',];
+  lodash:any = _;
+  dotarray: string[] = ['markupcomp','surge','dot','stageone','stagetwo','recycle',];
   layout: Layout = new DagreNodesOnlyLayout();
   strokeWidth: number = 0;
+  tooltip: any = {
+    x: 0,
+    y: 0
+  }
 
   constructor(
     public http: HttpClient
@@ -41,7 +45,7 @@ export class DiagramComponent implements OnInit {
 
   ngOnInit(): void {
     this.dotarray.forEach(item => {
-      console.log(_.findLast(this.nodes,(v)=> v.id === item), '++++++')
+      // console.log(_.findLast(this.nodes,(v)=> v.id === item), '++++++')
 
     });
   }
@@ -61,6 +65,11 @@ export class DiagramComponent implements OnInit {
       return {
         width: 150,
         height: 50
+      }
+    } else if (node.id === "markupcomp" || node.id === 'dot') {
+      return {
+        width: 0,
+        height: 0
       }
     } else {
       return {
@@ -85,8 +94,10 @@ export class DiagramComponent implements OnInit {
 
   mouseEnter(item: any) {
     let json: any  = _.findIndex(this.nodes,(v:any)=> v.id === item);
-    nodeLink.node[json].strokeWidth = 10;
-    console.log(json,nodeLink.node)
+    let pos: any = nodeLink.node[json];
+    // nodeLink.node[json].strokeWidth = 10;
+    console.log(pos)
+    this.tooltip = pos.position;
     return nodeLink.node[json].strokeWidth = 10;
   }
   mouseLeave(item: any) {
